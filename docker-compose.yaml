@@ -1,0 +1,63 @@
+version: '3.8'
+# version: '2'
+# - target: 8888
+#         published: 8888
+#         mode: ingress
+#       - target: 9000
+#         published: 9000
+#         mode: ingress
+services:
+  master:
+    image: helixious86/eos_base_image:centos7.v1.1.2
+    ports:
+      - target: 8888
+        published: 8888
+        mode: ingress
+      - target: 9000
+        published: 9000
+        mode: ingress
+    volumes:
+      - ".:/data:rw"
+    environment:
+      - INSTANCE_TYPE=genesis
+      - EOSIO_CDT_VERSION=latest
+      - EOS_VERSION=latest
+      - SERVER_PORT=8888
+      - P2P_PORT=9000
+    deploy:
+        replicas: 1
+        restart_policy:
+            condition: none
+    working_dir: /data
+    tty: true
+    entrypoint: bash -c "./init.sh && /bin/bash"
+  slave:
+    image: helixious86/eos_base_image:centos7.v1.1.2
+    ports:
+      - target: 8889
+        published: 8889
+        mode: ingress
+      - target: 9001
+        published: 9001
+        mode: ingress
+    volumes:
+      - ".:/data:rw"
+    environment:
+      - INSTANCE_TYPE=node
+      - EOSIO_CDT_VERSION=latest
+      - EOS_VERSION=latest
+      - SERVER_PORT=8889
+      - P2P_PORT=9001
+    deploy:
+        replicas: 3
+        restart_policy:
+            condition: none
+    working_dir: /data
+    tty: true
+    entrypoint: bash -c "./init.sh && /bin/bash"
+# enviroment variables in .env file
+# EOSIO_VERSION v2.0.5
+# EOSIO_CDT_VERSION v1.0
+# SMART_CONTRACT_NAME tasks2
+# PROJECT_PATH .
+# yum install -y epel-release && yum update -y && yum install -y cmake3 git wget aptitude curl gcc gcc-c++ apt-utils && ln -s /usr/bin/cmake3 /usr/bin/cmake && ./install_deb.sh $$cdt $$eos $$contract

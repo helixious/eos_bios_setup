@@ -1,0 +1,36 @@
+{
+  "name": "eos_bios_sequence",
+  "version": "1.0.0",
+  "description": "eosio cluster boot sequence",
+  "main": "biosboot.js",
+  "dependencies": {
+    "request": "^2.88.2",
+    "tail": "^2.0.3",
+    "underscore": "^1.10.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reset": "node biosboot.js reset",
+    "seed": "node biosboot.js genesis",
+    "start": "node biosboot.js start",
+    "hardstart": "node biosboot.js hardStart"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helixious/eos_bios_setup.git"
+  },
+  "keywords": [
+    "eosio",
+    "cleos",
+    "keosd",
+    "cluster",
+    "bios"
+  ],
+  "author": "SLE",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helixious/eos_bios_setup/issues"
+  },
+  "homepage": "https://github.com/helixious/eos_bios_setup#readme"
+}

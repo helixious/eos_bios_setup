@@ -1,2 +1,4 @@
 node_modules
 blockchain
+.env
+*.tar.xz
